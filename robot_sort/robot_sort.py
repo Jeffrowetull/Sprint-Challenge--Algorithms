@@ -96,7 +96,22 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
+        self.set_light_on() #telling us that the list is not sorted
+        while self.light_is_on():
+            self.swap_item() #pick up
+            while self.can_move_right(): #step to the right
+                self.move_right()
+                if self.compare_item()==1: #if the grounded item is smaller,
+                    self.swap_item() #take it
+            #now have the smallest item and is at end, so must move left
+            while self.can_move_left() and self.compare_item() != None:
+                self.move_left()
+            self.swap_item() #drop the smallest item in the empty spot
+            self.move_right() #move to the next item    
+            if not self.can_move_right(): #we reached the end of the list
+                self.set_light_off()  # bye bye robot
+
+
         pass
 
 
